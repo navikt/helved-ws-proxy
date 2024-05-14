@@ -1,0 +1,52 @@
+apiVersion: nais.io/v1alpha1
+kind: Application
+metadata:
+  name: ws-proxy
+  namespace: helved
+  labels:
+    team: helved
+spec:
+  image: {{image}}
+  port: 8080
+  webproxy: false
+  ingresses:
+    - https://helved-ws-proxy.intern.nav.no
+    - https://helved-ws-proxy.prod-fss-pub.nais.io
+  accessPolicy:
+    inbound:
+      rules:
+        - application: simulering
+          cluster: prod-gcp
+  env:
+    - name: HTTP_PROXY
+      value: http://webproxy-nais.nav.no:8088
+    - name: HTTPS_PROXY
+      value: http://webproxy-nais.nav.no:8088
+    - name: NO_PROXY
+      value: localhost,127.0.0.1,.local,.adeo.no,.nav.no,.nais.io,.intern.dev.nav.no
+    - name: GANDALF_BASE_URL
+      value: https://security-token-service.nais.adeo.no
+    - name: STS_BASE_URL
+      value: https://sts.adeo.no
+    - name: CICS_BASE_URL
+      value: https://wasapp.adeo.no
+  strategy:
+    type: RollingUpdate
+  azure:
+    application:
+      enabled: true
+  liveness:
+    path: /
+    initialDelay: 1
+  readiness:
+    path: /
+    initialDelay: 1
+  resources:
+    limits:
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 16Mi
+  replicas:
+    min: 2
+    max: 2
