@@ -22,6 +22,8 @@ jobs:
       image: ${{ steps.docker-build-push.outputs.image }}
 
   deploy-dev:
+    permissions:
+      id-token: write
     needs: build
     runs-on: ubuntu-latest
     steps:
