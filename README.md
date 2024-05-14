@@ -22,13 +22,13 @@ Fordi Gandalf også krever autentisering så må dette legges i `Authorization`-
 curl \
   -H "Authorization: Basic <basic..>" \
   -H "X-Proxy-Authorization: Bearer <jwt>" \
-  https://ws-proxy...fss-pub.nais.io/gandalf/rest/v1/sts/samltoken
+  https://helved-ws-proxy...fss-pub.nais.io/gandalf/rest/v1/sts/samltoken
 ```
 
 ```mermaid
 sequenceDiagram
     box GCP
-        participant spenn-simulering
+        participant simulering
     end
     box FSS
         participant ws-proxy
@@ -39,16 +39,15 @@ sequenceDiagram
         participant Token-endpoint
     end
     
-    spenn-simulering->>Token-endpoint: Utveksler client secret med JWT scopet for ws-proxy
-    Token-endpoint->>spenn-simulering: JWT
-    spenn-simulering->>ws-proxy: Bruker jwt i X-Proxy-Authorization<br />og Basic auth i Authorization,<br />og henter SAML assertion
+    simulering->>Token-endpoint: Utveksler client secret med JWT scopet for ws-proxy
+    Token-endpoint->>simulering: JWT
+    simulering->>ws-proxy: Bruker jwt i X-Proxy-Authorization<br />og Basic auth i Authorization,<br />og henter SAML assertion
     ws-proxy->>Gandalf: proxy_pass
     Gandalf->>ws-proxy: saml assertion
-    ws-proxy->>spenn-simulering: saml assertion 
-    spenn-simulering->>ws-proxy: Bruker jwt i X-Proxy-Authorization<br />og kontakter CICSen
+    ws-proxy->>simulering: saml assertion 
+    simulering->>ws-proxy: Bruker jwt i X-Proxy-Authorization<br />og kontakter CICSen
     ws-proxy->>CICS: proxy_pass
     CICS->>ws-proxy: response
-    ws-proxy->>spenn-simulering: response
-    
+    ws-proxy->>simulering: response
 
 ```

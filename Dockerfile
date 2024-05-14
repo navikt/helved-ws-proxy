@@ -33,7 +33,6 @@ RUN echo "env HTTPS_PROXY;" >> /usr/local/openresty/nginx/conf/nginx.conf
 RUN echo "env NO_PROXY;" >> /usr/local/openresty/nginx/conf/nginx.conf
 RUN echo "env GANDALF_BASE_URL;" >> /usr/local/openresty/nginx/conf/nginx.conf
 RUN echo "env STS_BASE_URL;" >> /usr/local/openresty/nginx/conf/nginx.conf
-RUN echo "env ARENA_BASE_URL;" >> /usr/local/openresty/nginx/conf/nginx.conf
 RUN echo "env CICS_BASE_URL;" >> /usr/local/openresty/nginx/conf/nginx.conf
 
 COPY proxy.conf /etc/nginx/conf.d/default.conf
