@@ -15,7 +15,7 @@ spec:
   accessPolicy:
     inbound:
       rules:
-        - application: simulering
+        - application: utsjekk-simulering
           cluster: prod-gcp
   env:
     - name: HTTP_PROXY
