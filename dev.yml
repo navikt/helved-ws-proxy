@@ -17,6 +17,8 @@ spec:
       rules:
         - application: utsjekk-simulering
           cluster: dev-gcp
+        - application: urskog
+          cluster: dev-gcp
   env:
     - name: HTTP_PROXY
       value: http://webproxy-nais.nav.no:8088
