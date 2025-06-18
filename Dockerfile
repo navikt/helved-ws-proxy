@@ -6,7 +6,7 @@ ARG GID=101
 # create nginx user/group first, to be consistent throughout docker variants
 RUN set -x \
     && addgroup -g $GID -S nginx \
-    && adduser -S -D -H -u $UID -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx \
+    && adduser -S -D -H -u $UID -h /var/cache/nginx -s /sbin/nologin -G nginx -g nginx nginx
 
 # nginx user must own the cache and etc directory to write cache and tweak the nginx config \
 RUN set -x \
