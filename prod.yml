@@ -17,6 +17,8 @@ spec:
       rules:
         - application: utsjekk-simulering
           cluster: prod-gcp
+        - application: urskog
+          cluster: prod-gcp
   env:
     - name: HTTP_PROXY
       value: http://webproxy-nais.nav.no:8088
@@ -50,3 +52,8 @@ spec:
   replicas:
     min: 2
     max: 2
+  observability:
+    logging:
+      destinations:
+        - id: elastic
+        - id: loki
