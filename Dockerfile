@@ -1,4 +1,4 @@
-FROM openresty/openresty:1.27.1.2-4-alpine-fat
+FROM openresty/openresty:1.29.2.1-alpine-fat
 
 ARG UID=101
 ARG GID=101
