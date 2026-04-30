@@ -33,15 +33,15 @@ jobs:
           RESOURCE: dev.yml
           IMAGE: ${{ needs.build.outputs.image }}
 
-  deploy-prod:
-    permissions:
-      id-token: write
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: nais/deploy/actions/deploy@v2
-        env:
-          CLUSTER: prod-fss
-          RESOURCE: prod.yml
-          IMAGE: ${{ needs.build.outputs.image }}
+#  deploy-prod:
+#    permissions:
+#      id-token: write
+#    needs: build
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: nais/deploy/actions/deploy@v2
+#        env:
+#          CLUSTER: prod-fss
+#          RESOURCE: prod.yml
+#          IMAGE: ${{ needs.build.outputs.image }}
