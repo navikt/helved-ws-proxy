@@ -35,6 +35,9 @@ RUN echo "env GANDALF_BASE_URL;" >> /usr/local/openresty/nginx/conf/nginx.conf
 RUN echo "env STS_BASE_URL;" >> /usr/local/openresty/nginx/conf/nginx.conf
 RUN echo "env CICS_BASE_URL;" >> /usr/local/openresty/nginx/conf/nginx.conf
 
+# Pull the patched Alpine libexpat until the upstream base image includes it.
+RUN apk add --no-cache --upgrade libexpat
+
 COPY proxy.conf /etc/nginx/conf.d/default.conf
 COPY jwt.lua /usr/local/openresty/nginx/
 
