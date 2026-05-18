@@ -15,6 +15,8 @@ FROM openresty/openresty:${OPENRESTY_VERSION}-${OPENRESTY_IMAGE_REVISION}-alpine
 ARG UID=101
 ARG GID=101
 
+RUN apk upgrade --no-cache libcrypto3 libssl3
+
 COPY --from=build /usr/local/openresty/site /usr/local/openresty/site
 COPY --from=build /usr/local/openresty/luajit/share/lua/5.1 /usr/local/openresty/luajit/share/lua/5.1
 COPY --from=build /usr/local/openresty/luajit/lib/lua/5.1 /usr/local/openresty/luajit/lib/lua/5.1
