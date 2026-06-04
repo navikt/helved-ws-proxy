@@ -17,6 +17,8 @@ spec:
       rules:
         - application: utsjekk-simulering
           cluster: prod-gcp
+        - application: simulering
+          cluster: prod-gcp
         - application: urskog
           cluster: prod-gcp
   env:
