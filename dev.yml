@@ -15,8 +15,6 @@ spec:
   accessPolicy:
     inbound:
       rules:
-        - application: utsjekk-simulering
-          cluster: dev-gcp
         - application: simulering
           cluster: dev-gcp
         - application: urskog
