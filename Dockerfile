@@ -1,11 +1,12 @@
 ARG OPENRESTY_VERSION=1.31.1.1
-ARG OPENRESTY_IMAGE_REVISION=1
+# OpenResty's bundled OpenSSL and PCRE require an updated image, not apk upgrade.
+ARG OPENRESTY_IMAGE_REVISION=6
 ARG LUA_RESTY_OPENIDC_VERSION=1.8.0-1
 
 # Keep LuaRocks in the builder stage only; the runtime image only needs OpenResty
 # plus the installed Lua modules.
 FROM openresty/openresty:${OPENRESTY_VERSION}-${OPENRESTY_IMAGE_REVISION}-alpine-fat AS build
-RUN apk upgrade --no-cache libcrypto3 libssl3 musl
+RUN apk upgrade --no-cache
 
 ARG LUA_RESTY_OPENIDC_VERSION
 
@@ -16,7 +17,7 @@ FROM openresty/openresty:${OPENRESTY_VERSION}-${OPENRESTY_IMAGE_REVISION}-alpine
 ARG UID=101
 ARG GID=101
 
-RUN apk upgrade --no-cache libcrypto3 libssl3 musl
+RUN apk upgrade --no-cache
 
 COPY --from=build /usr/local/openresty/site /usr/local/openresty/site
 COPY --from=build /usr/local/openresty/luajit/share/lua/5.1 /usr/local/openresty/luajit/share/lua/5.1
